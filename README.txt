@@ -1,4 +1,4 @@
-🎯 Projet Render – Parser Excel ultra complet (Doc Production OnlyFans)
+🎯 Projet Render – Parser Excel ultra complet
 
 1. Upload ce dossier dans ton dépôt Git déjà connecté à Render
 2. Lance un "Manual Deploy" sur Render
