@@ -1,4 +1,4 @@
-💡 Projet Render Unique – Prod OnlyFans
+💡 Projet Render
 
 Endpoints :
 - POST /parse → Génère JSON à partir du .xlsx
