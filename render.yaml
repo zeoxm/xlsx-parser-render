@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: of-analyzer-full
-    env: python
-    buildCommand: ""
-    startCommand: "python main.py"
