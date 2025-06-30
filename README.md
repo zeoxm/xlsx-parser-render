@@ -2,8 +2,8 @@
 # XLSX Parser Render API
 
 Cette API hébergée sur Render exécute toute la phase 6 du plan d’automatisation :
-- Parse les exports Infloww et Creator
-- Génère les JSON par chatteur
+- Parse les exports
+- Génère les JSON par c...
 - Produit les rapports DOCX et PDF
 - Crée la Synthèse Manager XLSX
 - Met à jour les JSON selon les ajustements
