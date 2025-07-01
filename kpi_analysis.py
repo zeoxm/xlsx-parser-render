@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import re
 from datetime import datetime
 from utils import (
     convert_time_to_minutes,
@@ -32,40 +33,39 @@ def process_files(chatteurs_file, creator_file, temp_dir):
     df_chat['Salaire net'] = df_chat['Salaire brut']
     df_chat['Ajustement'] = 0
 
-    ca_total = df_creator['Total earnings Net'].sum()
     fans_total = df_creator['Active fans'].sum()
     nb_chatteurs = len(df_chat)
-    semaine = datetime.today().date() - pd.to_timedelta(datetime.today().weekday(), unit='D')
+    semaine = datetime.today().date() - pd.totimedelta(datetime.today().weekday(), unit='D')
     semaine = semaine.strftime("%Y-%m-%d")
 
     results = []
 
-    for _, row in df_chat.iterrows():
+    for , row in df_chat.iterrows():
         chatteur = row['Employees']
         modele = row['Group']
+
+        creator_row = df_creator[df_creator['Model'] == modele]
+
+        if not creator_row.empty:
+            raw_value = str(creator_row['Total earning Net'].values[0]).replace(',', '.').replace('$', '')
+            try:
+                ca_total = float(re.findall(r"[\d.]+", raw_value)[0])
+            except:
+                ca_total = 0.0
+        else:
+            ca_total = 0.0
+
         context = {
             "CA_model": ca_total,
             "fans_model": fans_total,
             "chatteurs_model": nb_chatteurs
-            
-        creator_row = df_creator[df_creator['Model'] == model]
-
-if not creator_row.empty:
-    raw_value = str(creator_row['Total earning Net'].values[0]).replace(',', '.').replace('$', '')
-    try:
-        ca_total = float(re.findall(r"[\d.]+", raw_value)[0])
-    except:
-        ca_total = 0.0
-else:
-    ca_total = 0.0
-       
         }
 
         flags = detect_flags(row, context)
-        typologies = detect_typologies(row, context)
+        typologies =
+detect_typologies(row, context)
         spc, spc_details = compute_spc(row, typologies)
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
-
         result = {
             "chatteur": chatteur,
             "modele": modele,
