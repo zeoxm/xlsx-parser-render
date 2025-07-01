@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: of-analyzer-full
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python main.py"
