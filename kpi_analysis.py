@@ -47,7 +47,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         creator_row = df_creator[df_creator['Creator'] == modele]
 
         if not creator_row.empty:
-            raw_value = str(creator_row['Total earning Net'].values[0]).replace(',', '.').replace('$', '')
+            raw_value = str(creator_row['Total earnings Net'].values[0]).replace(',', '.').replace('$', '')
             try:
                 ca_total = float(re.findall(r"[\d.]+", raw_value)[0])
             except:
