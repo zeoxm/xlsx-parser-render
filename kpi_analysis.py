@@ -35,7 +35,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
 
     fans_total = df_creator['Active fans'].sum()
     nb_chatteurs = len(df_chat)
-    semaine = datetime.today().date() - pd.totimedelta(datetime.today().weekday(), unit='D')
+    semaine = datetime.today().date() - pd.to_timedelta(datetime.today().weekday(), unit='D')
     semaine = semaine.strftime("%Y-%m-%d")
 
     results = []
@@ -62,10 +62,10 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         }
 
         flags = detect_flags(row, context)
-        typologies =
-detect_typologies(row, context)
+        typologies = detect_typologies(row, context)
         spc, spc_details = compute_spc(row, typologies)
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
+
         result = {
             "chatteur": chatteur,
             "modele": modele,
