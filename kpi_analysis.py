@@ -44,7 +44,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         chatteur = row['Employees']
         modele = row['Group']
 
-        creator_row = df_creator[df_creator['Model'] == modele]
+        creator_row = df_creator[df_creator['Creator'] == modele]
 
         if not creator_row.empty:
             raw_value = str(creator_row['Total earning Net'].values[0]).replace(',', '.').replace('$', '')
