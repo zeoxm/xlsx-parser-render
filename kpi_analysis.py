@@ -68,7 +68,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
             "salaire_brut": round(row['Salaire brut'], 2),
             "ajustement": 0,
             "salaire_net": round(row['Salaire net'], 2),
-            "CA_model": round(float(str(ca_total).rep)),
+            "CA_model": round(float(str(ca_total).replace(',',',')),2),
             "fans_model": int(fans_total),
         }
 
