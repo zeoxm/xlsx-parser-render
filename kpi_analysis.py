@@ -68,7 +68,20 @@ def process_files(chatteurs_file, creator_file, temp_dir):
             "salaire_brut": round(row['Salaire brut'], 2),
             "ajustement": 0,
             "salaire_net": round(row['Salaire net'], 2),
-            "CA_model": round(float(str(ca_total).replace(',','.')),2),
+           import re
+
+creator_row = df_creator[df_creator['Model'] == model]
+
+if not creator_row.empty:
+    raw_value = str(creator_row['Total earning Net'].values[0]).replace(',', '.').replace('$', '')
+    try:
+        ca_total = float(re.findall(r"[\d.]+", raw_value)[0])
+    except:
+        ca_total = 0.0
+else:
+    ca_total = 0.0
+
+"CA_model": round(ca_total, 2),
             "fans_model": int(fans_total),
         }
 
