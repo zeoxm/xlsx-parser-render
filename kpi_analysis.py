@@ -32,7 +32,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
     df_chat['Salaire net'] = df_chat['Salaire brut']
     df_chat['Ajustement'] = 0
 
-    ca_total = df_creator['Total earnings Net ($)'].sum()
+    ca_total = df_creator['Total earnings Net'].sum()
     fans_total = df_creator['Active fans'].sum()
     nb_chatteurs = len(df_chat)
     semaine = datetime.today().date() - pd.to_timedelta(datetime.today().weekday(), unit='D')
