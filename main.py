@@ -17,7 +17,7 @@ def parse():
     creator_file = request.files['creator']
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        json_data_list, semaine = process_files(chatteurs_file, creator_file, temp_dir)
+        json_data_list, semaine, output_paths = process_files(chatteurs_file, creator_file, temp_dir)
         xlsx_path = os.path.join(temp_dir, "Synthese_Manager.xlsx")
         generate_synthese_manager(json_data_list, xlsx_path)
         zip_path = os.path.join(temp_dir, "outputs.zip")
