@@ -90,7 +90,9 @@ def process_files(chatteurs_file, creator_file, temp_dir):
             result[col] = row[col] if not pd.isna(row[col]) else None
 
         results.append(result)
-
+    pdffilename = f"{chatteur}{semaine}.pdf"
+    pdf_path = os.path.join(temp_dir, pdf_filename)
+    generate_pdf(result, pdf_path)
     return results, semaine
     def generate_pdf(data, output_path):
     env = Environment(loader=FileSystemLoader("templates"))
