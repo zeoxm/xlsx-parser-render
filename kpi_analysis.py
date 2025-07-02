@@ -1,3 +1,5 @@
+from jinja2 import Environment, FileSystemLoader
+from weasyprint import HTML
 import pandas as pd
 import os
 import re
