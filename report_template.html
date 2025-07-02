@@ -1,88 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Rapport hebdo - {{ chatteur }}</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #fdfdfd;
-        }
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-        .section {
-            margin: 30px auto;
-            max-width: 800px;
-        }
-        .highlight {
-            font-size: 1.1em;
-            color: #444;
-            margin: 10px 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            font-size: 0.95em;
-        }
-        th {
-            background-color: #f2f2f2;
-            text-align: left;
-        }
-        td {
-            text-align: right;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Rapport Chatteur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      color: #333;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #1a1a1a;
+    }
+    .section {
+      margin-bottom: 25px;
+    }
+    .section-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    .item {
+      margin: 4px 0;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #d23b3b;
+    }
+    .tag {
+      display: inline-block;
+      background-color: #f0f0f0;
+      padding: 4px 8px;
+      margin: 2px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #f5f5f5;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
 </head>
 <body>
-    <h1>📋 Rapport de performance</h1>
-    <h2>{{ chatteur }} – {{ modele }} – semaine du {{ semaine }}</h2>
 
-    <div class="section">
-        <p class="highlight">🧠 <strong>SPC :</strong> {{ SPC }} – <strong>Typologies :</strong> {{ typologies|join(', ') }}</p>
-        <p class="highlight">🎯 <strong>Axe prioritaire :</strong> {{ axe }}</p>
-        <p class="highlight">📚 <strong>Modules à revoir :</strong> {{ modules|join(', ') }}</p>
-        <p class="highlight">📞 <strong>Appel managérial :</strong> {{ 'Oui' if appel_managérial else 'Non' }}</p>
-        <p class="highlight">💸 <strong>Salaire brut :</strong> {{ salaire_brut }}$ – <strong>Net :</strong> {{ salaire_net }}$</p>
-    </div>
+  <h1>📊 Rapport de performance hebdo</h1>
+  <h2>{{ data.chatteur }} — {{ data.modele }} — {{ data.semaine }}</h2>
 
-    <div class="section">
-        <h2>🧠 KPIs bruts</h2>
-        <table>
-            <tr><th>KPI</th><th>Valeur</th></tr>
-            <tr><td>Heures planifiées</td><td>{{ Scheduled_hours }}</td></tr>
-            <tr><td>Heures pointées</td><td>{{ Clocked_hours }}</td></tr>
-            <tr><td>Inactivité (min)</td><td>{{ Inactivité }}</td></tr>
-            <tr><td>Messages envoyés</td><td>{{ Messages_sent }}</td></tr>
-            <tr><td>Keystrokes (words)</td><td>{{ Keystrokes_words }}</td></tr>
-            <tr><td>Fans discutés</td><td>{{ Fans_chatted }}</td></tr>
-            <tr><td>PPVs unlock</td><td>{{ PPVs_unlocked }}</td></tr>
-        </table>
-    </div>
+  <div class="section">
+    <div class="section-title">⚙️ Synthèse</div>
+    <div class="item">🔢 SPC : <span class="highlight">{{ data.SPC }}</span></div>
+    <div class="item">💸 $/h : <span class="highlight">{{ data["$/h"] }}</span></div>
+    <div class="item">💰 Salaire brut : {{ data.salaire_brut }} — net : {{ data.salaire_net }}</div>
+    <div class="item">📈 CA modèle : {{ data.CA_model }} — Fans : {{ data.fans_model }}</div>
+  </div>
 
-    <div class="section">
-        <h2>🎯 KPIs croisés</h2>
-        <table>
-            <tr><th>KPI</th><th>Valeur</th></tr>
-            <tr><td>CA / fan</td><td>{{ CA_par_fan }}</td></tr>
-            <tr><td>Messages / fan</td><td>{{ Messages_par_fan }}</td></tr>
-            <tr><td>Keystrokes / fan</td><td>{{ Keystrokes_par_fan }}</td></tr>
-            <tr><td>CA / min</td><td>{{ CA_par_minute }}</td></tr>
-            <tr><td>Messages / min</td><td>{{ Messages_par_minute }}</td></tr>
-            <tr><td>Keystrokes / min</td><td>{{ Keystrokes_par_minute }}</td></tr>
-            <tr><td>Keystrokes / message</td><td>{{ Keystrokes_par_msg }}</td></tr>
-            <tr><td>Prix moyen PPV</td><td>{{ Prix_moyen }}</td></tr>
-            <tr><td>Golden Ratio</td><td>{{ Golden_ratio }}</td></tr>
-            <tr><td>Unlock Ratio</td><td>{{ Unlock_ratio }}</td></tr>
-        </table>
+  <div class="section">
+    <div class="section-title">🚩 Flags</div>
+    {% for flag in data.flags %}
+      <span class="tag">{{ flag }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="section">
+    <div class="section-title">🎭 Typologies</div>
+    {% for typo in data.typologies %}
+      <span class="tag">{{ typo }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="section">
+    <div class="section-title">🎯 Coaching</div>
+    <div class="item">🧠 Axe prioritaire : <span class="highlight">{{ data.axe }}</span></div>
+    <div class="item">📚 Modules à revoir :
+      {% for module in data.modules %}
+        <span class="tag">{{ module }}</span>
+      {% endfor %}
     </div>
+    <div class="item">📞 Appel managérial : <strong>{{ 'Oui' if data.appel_managérial else 'Non' }}</strong></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>📋 Détail complet des KPIs</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>KPI</th>
+        <th>Valeur</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, value in data.items() %}
+        {% if key not in ['chatteur', 'modele', 'semaine', 'flags', 'typologies', 'modules', 'axe', 'appel_managérial'] %}
+          <tr>
+            <td>{{ key }}</td>
+            <td>{{ value|string }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
 </body>
 </html>
