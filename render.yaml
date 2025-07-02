@@ -7,6 +7,3 @@ services:
   envVars:
      - key: PYTHON_VERSION
        value: 3.10.13
-  build:
-    pythonVersion: 3.10.13
-    requirementsPath: requirements.txt
