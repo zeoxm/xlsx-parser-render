@@ -90,9 +90,31 @@ def process_files(chatteurs_file, creator_file, temp_dir):
             result[col] = row[col] if not pd.isna(row[col]) else None
 
         results.append(result)
-    pdffilename = f"{chatteur}{semaine}.pdf"
-    pdf_path = os.path.join(temp_dir, pdf_filename)
-    generate_pdf(result, pdf_path)
+        def generate_pdf(data, output_path):
+        env = Environment(loader=FileSystemLoader("templates"))
+        template = env.get_template("report_template.html")
+
+        html_out = template.render(
+        chatteur=data["chatteur"],
+        modele=data["modele"],
+        semaine=data["semaine"],
+        SPC=data["SPC"],
+        dollar_per_hour=data["$/h"],
+        axe=data["axe"],
+        modules=", ".join(data["modules"]),
+        appel="Oui" if data["appel_managérial"] else "Non",
+        flags=", ".join(data["flags"]),
+        typologies=", ".join(data["typologies"]),
+        CA=f'{round(data["Sales"], 2)} $',
+        prix_moyen=f'{round(data["Prix moyen"], 2)} $',
+        ppv=int(data["PPVs unlocked"]),
+        push=int(data["PPVs sent"]),
+        fans=int(data["Fans chatted"]),
+        golden_ratio=round(data["Golden ratio"], 2)
+    )
+
+    HTML(string=html_out).write_pdf(output_path)
+
     return results, semaine
     def generate_pdf(data, output_path):
     env = Environment(loader=FileSystemLoader("templates"))
