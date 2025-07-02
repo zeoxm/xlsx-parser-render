@@ -89,6 +89,14 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         for col in df_chat.columns:
             result[col] = row[col] if not pd.isna(row[col]) else None
 
+        
+# Génération du PDF lisible
+pdf_path = os.path.join(temp_dir, f"{chatteur}_{semaine}.pdf")
+try:
+    generate_pdf(result, pdf_path)
+except Exception as e:
+    print(f"Erreur PDF {chatteur}: {e}")
+
         results.append(result)
 
 def generate_pdf(data, output_path):
@@ -118,3 +126,31 @@ def generate_pdf(data, output_path):
     )
 
     HTML(string=html_out).write_pdf(output_path)
+
+def generate_pdf(data, output_path):
+    try:
+        env = Environment(loader=FileSystemLoader("templates"))
+        template = env.get_template("report_template.html")
+
+        html_out = template.render(
+            chatteur=data["chatteur"],
+            modele=data["modele"],
+            semaine=data["semaine"],
+            SPC=data["SPC"],
+            dollar_per_hour=data["$/h"],
+            axe=data["axe"],
+            modules=", ".join(data["modules"]),
+            appel="Oui" if data["appel_managérial"] else "Non",
+            flags=", ".join(data["flags"]),
+            typologies=", ".join(data["typologies"]),
+            CA=f'{round(data["Sales"], 2)} $',
+            prix_moyen=f'{round(data["Prix moyen"], 2)} $',
+            ppv=int(data["PPVs unlocked"]),
+            push=int(data["PPVs sent"]),
+            fans=int(data["Fans chatted"]),
+            golden_ratio=round(data["Golden ratio"], 2)
+        )
+
+        HTML(string=html_out).write_pdf(output_path)
+    except Exception as e:
+        print(f"Erreur PDF : {e}")
