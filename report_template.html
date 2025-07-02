@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport {{ chatteur }}</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Roboto, sans-serif;
+            margin: 40px auto;
+            max-width: 700px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #ccc;
+            font-size: 20px;
+        }
+        .section {
+            margin-top: 15px;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 50% 50%;
+        }
+        .kpi-grid p {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧾 Rapport hebdomadaire</h1>
+    <p><span class="label">👤 Chatteur :</span> {{ chatteur }}</p>
+    <p><span class="label">🎭 Modèle :</span> {{ modele }}</p>
+    <p><span class="label">🗓️ Semaine :</span> {{ semaine }}</p>
+
+    <div class="section">
+        <h2>🧠 Coaching & Scoring</h2>
+        <p><span class="label">SPC :</span> {{ SPC }}</p>
+        <p><span class="label">💰 $ / h :</span> {{ dollar_per_hour }}</p>
+        <p><span class="label">🧭 Axe prioritaire :</span> {{ axe }}</p>
+        <p><span class="label">📚 Modules à revoir :</span> {{ modules }}</p>
+        <p><span class="label">☎️ Appel managérial :</span> {{ appel }}</p>
+    </div>
+
+    <div class="section">
+        <h2>⚠️ Flags</h2>
+        <p>{{ flags }}</p>
+    </div>
+
+    <div class="section">
+        <h2>🔍 Typologies</h2>
+        <p>{{ typologies }}</p>
+    </div>
+
+    <div class="section">
+        <h2>📊 Chiffres clés</h2>
+        <div class="kpi-grid">
+            <p><span class="label">CA brut :</span> {{ CA }}</p>
+            <p><span class="label">Prix moyen PPV :</span> {{ prix_moyen }}</p>
+            <p><span class="label">PPVs débloqués :</span> {{ ppv }}</p>
+            <p><span class="label">Push envoyés :</span> {{ push }}</p>
+            <p><span class="label">Fans actifs :</span> {{ fans }}</p>
+            <p><span class="label">Golden ratio :</span> {{ golden_ratio }}</p>
+        </div>
+    </div>
+</body>
+</html>
