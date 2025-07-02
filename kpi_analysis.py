@@ -40,7 +40,8 @@ def process_files(chatteurs_file, creator_file, temp_dir):
     semaine = semaine.strftime("%Y-%m-%d")
 
     results = []
-
+    output_paths = []
+    
     for _, row in df_chat.iterrows():
         chatteur = row['Employees']
         modele = row['Group']
@@ -67,7 +68,8 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         typologies = detect_typologies(row, context)
         spc, spc_details = compute_spc(row, typologies)
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
-        output_paths = {
+        
+        try:
         result = {
             "chatteur": chatteur,
             "modele": modele,
@@ -90,7 +92,6 @@ def process_files(chatteurs_file, creator_file, temp_dir):
             result[col] = row[col] if not pd.isna(row[col]) else None
 
         # Export PDF
-        try:
             env = Environment(loader=FileSystemLoader("."))
             template = env.get_template("report_template.html")
             html_out = template.render(data=result)
