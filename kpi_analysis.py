@@ -120,7 +120,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 push=int(data["PPVs sent"]),
                 fans=int(data["Fans chatted"]),
                 golden_ratio=round(data["Golden ratio"], 2)
-            )
+                )
 
             HTML(string=html_out).write_pdf(output_path)
          except Exception as e:
