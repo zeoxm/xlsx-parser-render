@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport hebdo - {{ chatteur }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #fdfdfd;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            margin: 30px auto;
+            max-width: 800px;
+        }
+        .highlight {
+            font-size: 1.1em;
+            color: #444;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 0.95em;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        td {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>📋 Rapport de performance</h1>
+    <h2>{{ chatteur }} – {{ modele }} – semaine du {{ semaine }}</h2>
+
+    <div class="section">
+        <p class="highlight">🧠 <strong>SPC :</strong> {{ SPC }} – <strong>Typologies :</strong> {{ typologies|join(', ') }}</p>
+        <p class="highlight">🎯 <strong>Axe prioritaire :</strong> {{ axe }}</p>
+        <p class="highlight">📚 <strong>Modules à revoir :</strong> {{ modules|join(', ') }}</p>
+        <p class="highlight">📞 <strong>Appel managérial :</strong> {{ 'Oui' if appel_managérial else 'Non' }}</p>
+        <p class="highlight">💸 <strong>Salaire brut :</strong> {{ salaire_brut }}$ – <strong>Net :</strong> {{ salaire_net }}$</p>
+    </div>
+
+    <div class="section">
+        <h2>🧠 KPIs bruts</h2>
+        <table>
+            <tr><th>KPI</th><th>Valeur</th></tr>
+            <tr><td>Heures planifiées</td><td>{{ Scheduled_hours }}</td></tr>
+            <tr><td>Heures pointées</td><td>{{ Clocked_hours }}</td></tr>
+            <tr><td>Inactivité (min)</td><td>{{ Inactivité }}</td></tr>
+            <tr><td>Messages envoyés</td><td>{{ Messages_sent }}</td></tr>
+            <tr><td>Keystrokes (words)</td><td>{{ Keystrokes_words }}</td></tr>
+            <tr><td>Fans discutés</td><td>{{ Fans_chatted }}</td></tr>
+            <tr><td>PPVs unlock</td><td>{{ PPVs_unlocked }}</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>🎯 KPIs croisés</h2>
+        <table>
+            <tr><th>KPI</th><th>Valeur</th></tr>
+            <tr><td>CA / fan</td><td>{{ CA_par_fan }}</td></tr>
+            <tr><td>Messages / fan</td><td>{{ Messages_par_fan }}</td></tr>
+            <tr><td>Keystrokes / fan</td><td>{{ Keystrokes_par_fan }}</td></tr>
+            <tr><td>CA / min</td><td>{{ CA_par_minute }}</td></tr>
+            <tr><td>Messages / min</td><td>{{ Messages_par_minute }}</td></tr>
+            <tr><td>Keystrokes / min</td><td>{{ Keystrokes_par_minute }}</td></tr>
+            <tr><td>Keystrokes / message</td><td>{{ Keystrokes_par_msg }}</td></tr>
+            <tr><td>Prix moyen PPV</td><td>{{ Prix_moyen }}</td></tr>
+            <tr><td>Golden Ratio</td><td>{{ Golden_ratio }}</td></tr>
+            <tr><td>Unlock Ratio</td><td>{{ Unlock_ratio }}</td></tr>
+        </table>
+    </div>
+</body>
+</html>
