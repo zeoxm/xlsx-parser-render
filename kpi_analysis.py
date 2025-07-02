@@ -102,8 +102,11 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         try:
             env = Environment(loader=FileSystemLoader("."))
             template = env.get_template("report_template.html")
+            html_out = template.render(data=data)
+            pdfkit.from_string(html_out, outputh_path)
+        except Exception as e:
+            print(f"Erreur PDF : {e}")
 
-            html_out = template.render(data=entry)
                 chatteur=data["chatteur"],
                 modele=data["modele"],
                 semaine=data["semaine"],
@@ -122,5 +125,4 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 golden_ratio=round(data["Golden ratio"], 2)
 
             HTML(string=html_out).write_pdf(output_path)
-         except Exception as e:
-            print(f"Erreur PDF : {e}")
+         
