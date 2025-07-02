@@ -103,7 +103,7 @@ def generate_pdf(data, output_path):
         env = Environment(loader=FileSystemLoader("."))
         template = env.get_template("report_template.html")
 
-        html_out = template.render(
+        html_out = template.render(data=entry)
             chatteur=data["chatteur"],
             modele=data["modele"],
             semaine=data["semaine"],
