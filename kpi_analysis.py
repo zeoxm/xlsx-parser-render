@@ -100,7 +100,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
     
 def generate_pdf(data, output_path):
     try:
-        env = Environment(loader=FileSystemLoader("templates"))
+        env = Environment(loader=FileSystemLoader("."))
         template = env.get_template("report_template.html")
 
         html_out = template.render(
