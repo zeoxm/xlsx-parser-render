@@ -1,0 +1,13 @@
+services:
+  
+type: web
+  name: automate-of-api
+  runtime: python
+  buildCommand: ""
+  startCommand: gunicorn main:app
+  envVars:
+key: PYTHON_VERSION
+    value: 3.10.13
+build:
+  pythonVersion: 3.10.13
+  requirementsPath: requirements.txt
