@@ -1,11 +1,25 @@
 import re
 
+import re
+
 def convert_time_to_minutes(time_str):
-    try:
-        parts = str(time_str).split(':')
-        return int(parts[0]) * 60 + int(parts[1])
-    except:
+    if pd.isna(time_str):
         return 0
+
+    time_str = str(time_str).lower().replace(" ", "")
+
+    hours = 0
+    minutes = 0
+
+    match_hours = re.search(r'(\d+)h', time_str)
+    match_minutes = re.search(r'(\d+)min', time_str)
+
+    if match_hours:
+        hours = int(match_hours.group(1))
+    if match_minutes:
+        minutes = int(match_minutes.group(1))
+
+    return hours * 60 + minutes
 
 def convert_percent(value):
     try:
