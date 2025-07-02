@@ -70,23 +70,23 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
         
         try: {
-        result = {
-            "chatteur": chatteur,
-            "modele": modele,
-            "semaine": semaine,
-            "SPC": spc,
-            "$/h": round(row['CA / min'] * 60, 2),
-            "flags": flags,
-            "typologies": typologies[:2],
-            "axe": axe,
-            "modules": modules,
-            "appel_managérial": appel,
-            "salaire_brut": round(row['Salaire brut'], 2),
-            "ajustement": 0,
-            "salaire_net": round(row['Salaire net'], 2),
-            "CA_model": round(ca_total, 2),
-            "fans_model": int(fans_total),
-        }
+            result = {
+                "chatteur": chatteur,
+                "modele": modele,
+                "semaine": semaine,
+                "SPC": spc,
+                "$/h": round(row['CA / min'] * 60, 2),
+                "flags": flags,
+                "typologies": typologies[:2],
+                "axe": axe,
+                "modules": modules,
+                "appel_managérial": appel,
+                "salaire_brut": round(row['Salaire brut'], 2),
+                "ajustement": 0,
+                "salaire_net": round(row['Salaire net'], 2),
+                "CA_model": round(ca_total, 2),
+                "fans_model": int(fans_total),
+            }
         for col in df_chat.columns:
             result[col] = row[col] if not pd.isna(row[col]) else None
 
