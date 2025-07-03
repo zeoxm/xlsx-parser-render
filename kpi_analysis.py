@@ -87,6 +87,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 "CA_model": round(ca_total, 2),
                 "fans_model": int(fans_total),
             }
+            
         for col in df_chat.columns:
             result[col] = row[col] if not pd.isna(row[col]) else None
 
