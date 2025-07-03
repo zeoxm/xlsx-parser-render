@@ -26,7 +26,7 @@ def parse():
            for json_data in json_data_list:
                 filename = f"{json_data['chatteur']}.json"
                 filepath = os.path.join(temp_dir, filename)
-            with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, 'w', encoding='utf-8') as f:
             import json
                 json.dump(json_data, f, ensure_ascii=False, indent=2)
                 zipf.write(filepath, arcname=filename)
