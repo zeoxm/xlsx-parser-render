@@ -69,7 +69,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         spc, spc_details = compute_spc(row, typologies)
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
         
-        try: {
+        try:
             result == {
                 "chatteur": chatteur,
                 "modele": modele,
@@ -100,7 +100,6 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 output_paths.append(pdf_path)
             except Exception as e:
                 print(f"Erreur PDF : {e}")
-            }
         
             results.append(result)
 
