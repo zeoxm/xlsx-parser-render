@@ -17,11 +17,11 @@ def parse():
     creator_file = request.files['creator']
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        json_data_list, semaine, output_paths = process_files(chatteurs_file, creator_file, temp_dir)
-        xlsx_path = os.path.join(temp_dir, "Synthese_Manager.xlsx")
-        generate_synthese_manager(json_data_list, xlsx_path)
-        zip_path = os.path.join(temp_dir, "outputs.zip")
-        zipfile.ZipFile(zip_path, 'w') as zipf:
+         json_data_list, semaine, output_paths = process_files(chatteurs_file, creator_file, temp_dir)
+         xlsx_path = os.path.join(temp_dir, "Synthese_Manager.xlsx")
+         generate_synthese_manager(json_data_list, xlsx_path)
+         zip_path = os.path.join(temp_dir, "outputs.zip")
+    with zipfile.ZipFile(zip_path, 'w') as zipf:
     # 1. Créer les JSON manuellement depuis les datas
            for json_data in json_data_list:
                 filename = f"{json_data['chatteur']}.json"
