@@ -60,7 +60,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         result = None
         try:
                 ca_total = float(re.findall(r"[\d.]+", raw_value)[0])
-            except:
+        except:
                 ca_total = 0.0
             fans_total = int(creator_row['Active fans'].values[0])
         else:
