@@ -78,7 +78,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 "$/h": round(float(row.get('CA / min',0)) * 60, 2),
                 "flags": ", ".join(map(str,flags)) if flags else "-",
                 "typologies": ", ".join(map(str, typologies[:2])) if typologies else "-",
-                "axe": axe if axe else "-"
+                "axe": axe if axe else "-",
                 "modules": ", ".join(map(str, modules)) if modules else "-",
                 "appel_managérial": appel,
                 "salaire_brut": round(row['Salaire brut'], 2),
