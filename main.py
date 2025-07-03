@@ -21,17 +21,22 @@ def parse():
         xlsx_path = os.path.join(temp_dir, "Synthese_Manager.xlsx")
         generate_synthese_manager(json_data_list, xlsx_path)
         zip_path = os.path.join(temp_dir, "outputs.zip")
-        with zipfile.ZipFile(zip_path, 'w') as zipf:
-            for json_data in json_data_list:
-                filename = f"{json_data['chatteur']}.json"
-                filepath = os.path.join(temp_dir, filename)
-                with open(filepath, 'w', encoding='utf-8') as f:
-                    import json
-                    json.dump(json_data, f, ensure_ascii=False, indent=2)
-                    for path in output_paths:
-                        zipf.write(path, arcname=os.path.basename(path))
-                        zipf.write(xlsx_path, arcname="Synthese_Manager.xlsx")
+       with zipfile.ZipFile(zip_path, 'w') as zipf:
+    # 1. Créer les JSON manuellement depuis les datas
+    for json_data in json_data_list:
+        filename = f"{json_data['chatteur']}.json"
+        filepath = os.path.join(temp_dir, filename)
+        with open(filepath, 'w', encoding='utf-8') as f:
+            import json
+            json.dump(json_data, f, ensure_ascii=False, indent=2)
+        zipf.write(filepath, arcname=filename)
 
+    # 2. Ajouter tous les PDF + JSON générés automatiquement
+    for path in output_paths:
+        zipf.write(path, arcname=os.path.basename(path))
+
+    # 3. Ajouter la synthèse
+    zipf.write(xlsx_path, arcname="Synthese_Manager.xlsx")
         return send_file(zip_path, mimetype='application/zip', as_attachment=True)
 
 if __name__ == '__main__':
