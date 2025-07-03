@@ -21,7 +21,7 @@ def parse():
         xlsx_path = os.path.join(temp_dir, "Synthese_Manager.xlsx")
         generate_synthese_manager(json_data_list, xlsx_path)
         zip_path = os.path.join(temp_dir, "outputs.zip")
-       with zipfile.ZipFile(zip_path, 'w') as zipf:
+        zipfile.ZipFile(zip_path, 'w') as zipf:
     # 1. Créer les JSON manuellement depuis les datas
            for json_data in json_data_list:
                 filename = f"{json_data['chatteur']}.json"
