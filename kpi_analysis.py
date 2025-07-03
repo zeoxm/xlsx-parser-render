@@ -101,7 +101,11 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 output_paths.append(pdf_path)
         except Exception as e:
                 print(f"Erreur PDF : {e}")
-
+        # Export PDF JSon
+                json_path = os.path.join(temp_dir, f"{chatteur}_{semaine}.json")
+                with open(json_path, 'w', encoding='utf-8') as f:
+                    json.dump(resultat, f, indent=4, ensure_ascii=False)
+                    outputh_paths.appends(json_path)
         if result:
             results.append(result)
 
