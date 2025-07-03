@@ -118,10 +118,10 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                     output_paths.append(json_path)
 
         except Exception as e:
-             print(f"Erreur sur {chatteur} : {e}")
-             traceback.print_exc()
-              print(f"Erreur sur {chatteur} : {e}")
-              traceback.print_exc()
+            print(f"Erreur sur {chatteur} : {e}")
+            traceback.print_exc()
+            print(f"Erreur sur {chatteur} : {e}")
+            traceback.print_exc()
 
         if result:
             results.append(result)
