@@ -89,8 +89,6 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 "fans_model": int(fans_total),
             }
             
-            for col in df_chat.columns:
-                result[col] = row[col] if not pd.isna(row[col]) else None
 
         # Export PDF
                 env = Environment(loader=FileSystemLoader("."))
@@ -99,6 +97,8 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 pdf_path = os.path.join(temp_dir, f"{chatteur}_{semaine}.pdf")
                 HTML(string=html_out).write_pdf(pdf_path)
                 output_paths.append(pdf_path)
+            for col in df_chat.columns:
+                result[col] = row[col] if not pd.isna(row[col]) else None
         except Exception as e:
                 print(f"Erreur PDF : {e}")
         # Export PDF JSon
