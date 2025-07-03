@@ -70,7 +70,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
         
         try: {
-            result = {
+            result == {
                 "chatteur": chatteur,
                 "modele": modele,
                 "semaine": semaine,
