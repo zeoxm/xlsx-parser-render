@@ -4,6 +4,8 @@ from weasyprint import HTML
 import pandas as pd
 import os
 import re
+import traceback
+import json
 from datetime import datetime
 from utils import (
     convert_time_to_minutes,
