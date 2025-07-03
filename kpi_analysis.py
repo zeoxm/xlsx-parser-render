@@ -62,7 +62,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 ca_total = float(re.findall(r"[\d.]+", raw_value)[0])
         except:
                 ca_total = 0.0
-            fans_total = int(creator_row['Active fans'].values[0])
+                fans_total = int(creator_row['Active fans'].values[0])
         else:
             ca_total = 0.0
             fans_total = 0
@@ -107,15 +107,15 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 env = Environment(loader=FileSystemLoader(template_dir))
                 template = env.get_template("report_template.html")
                 html_out = template.render(data=result)
-            pdf_path = os.path.join(temp_dir, f"{safe_chatteur}_{semaine}.pdf")
+                pdf_path = os.path.join(temp_dir, f"{safe_chatteur}_{semaine}.pdf")
                 HTML(string=html_out).write_pdf(pdf_path)
-            output_paths.append(pdf_path)
+                output_paths.append(pdf_path)
 
         # Export JSON
                 json_path = os.path.join(temp_dir, f"{safe_chatteur}_{semaine}.json")
                 with open(json_path, 'w', encoding='utf-8') as f:
                     json.dump(result, f, indent=4, ensure_ascii=False)
-                output_paths.append(json_path)
+                    output_paths.append(json_path)
 
         except Exception as e:
              print(f"Erreur sur {chatteur} : {e}")
