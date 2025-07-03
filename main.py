@@ -28,8 +28,9 @@ def parse():
                 with open(filepath, 'w', encoding='utf-8') as f:
                     import json
                     json.dump(json_data, f, ensure_ascii=False, indent=2)
-                zipf.write(filepath, arcname=filename)
-            zipf.write(xlsx_path, arcname="Synthese_Manager.xlsx")
+                    for path in output_paths:
+                        zipf.write(path, arcname=os.path.basename(path))
+                        zipf.write(xlsx_path, arcname="Synthese_Manager.xlsx")
 
         return send_file(zip_path, mimetype='application/zip', as_attachment=True)
 
