@@ -69,7 +69,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         spc, spc_details = compute_spc(row, typologies)
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
 
-       result = None
+    result = None
 
     try:
         result = {
