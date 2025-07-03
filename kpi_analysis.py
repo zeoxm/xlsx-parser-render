@@ -75,7 +75,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 "modele": modele,
                 "semaine": semaine,
                 "SPC": spc,
-                "$/h": round(row['CA / min'] * 60, 2),
+                "$/h": round(float(row.get('CA / min',0)) * 60, 2),
                 "flags": flags,
                 "typologies": typologies[:2],
                 "axe": axe,
