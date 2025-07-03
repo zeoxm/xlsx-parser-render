@@ -88,20 +88,20 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 "fans_model": int(fans_total),
             }
             
-        for col in df_chat.columns:
+            for col in df_chat.columns:
             result[col] = row[col] if not pd.isna(row[col]) else None
 
         # Export PDF
-            env = Environment(loader=FileSystemLoader("."))
-            template = env.get_template("report_template.html")
-            html_out = template.render(data=result)
-            pdf_path = os.path.join(temp_dir, f"{chatteur}_{semaine}.pdf")
-            HTML(string=html_out).write_pdf(pdf_path)
-            output_paths.append(pdf_path)
-        except Exception as e:
-            print(f"Erreur PDF : {e}")
-        }
+                env = Environment(loader=FileSystemLoader("."))
+                template = env.get_template("report_template.html")
+                html_out = template.render(data=result)
+                pdf_path = os.path.join(temp_dir, f"{chatteur}_{semaine}.pdf")
+                HTML(string=html_out).write_pdf(pdf_path)
+                output_paths.append(pdf_path)
+            except Exception as e:
+                print(f"Erreur PDF : {e}")
+            }
         
-        results.append(result)
+            results.append(result)
 
-    return results, semaine, output_paths
+            return results, semaine, output_paths
