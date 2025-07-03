@@ -101,6 +101,6 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         except Exception as e:
                 print(f"Erreur PDF : {e}")
         
-            results.append(result)
+        results.append(result)
 
-            return results, semaine, output_paths
+        return results, semaine, output_paths
