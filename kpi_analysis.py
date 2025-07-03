@@ -103,6 +103,6 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 print(f"Erreur PDF : {e}")
 
         if result:
-        results.append(result)
+            results.append(result)
 
         return results, semaine, output_paths
