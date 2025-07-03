@@ -48,6 +48,11 @@ def process_files(chatteurs_file, creator_file, temp_dir):
     for index, row in df_chat.iterrows():
         chatteur = row['Employees']
         modele = row['Group']
+        print(f"--- Traitement du chatteur : {chatteur}")
+        safe_chatteur = re.sub(r'[^a-zA-Z0-9_-]', '_', chatteur)
+        safe_modele = re.sub(r'[^a-zA-Z0-9_-]', '_', modele)
+        chatteur = row ['Employees']
+        modele = row['Group']
 
         creator_row = df_creator[df_creator['Creator'] == modele]
         if not creator_row.empty:
