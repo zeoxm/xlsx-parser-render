@@ -68,7 +68,8 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         typologies = detect_typologies(row, context)
         spc, spc_details = compute_spc(row, typologies)
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
-        
+
+        result = None
         try:
             result == {
                 "chatteur": chatteur,
