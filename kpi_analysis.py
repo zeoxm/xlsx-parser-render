@@ -42,7 +42,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
     results = []
     output_paths = []
     
-    for _, row in df_chat.iterrows():
+    for index, row in df_chat.iterrows():
         chatteur = row['Employees']
         modele = row['Group']
 
