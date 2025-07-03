@@ -1,12 +1,12 @@
 
-from jinja2 import Environment, FileSystemLoader
-from weasyprint import HTML
 import pandas as pd
 import os
 import re
 import traceback
 import json
 from datetime import datetime
+from jinja2 import Environment, FileSystemLoader
+from weasyprint import HTML
 from utils import (
     convert_time_to_minutes,
     convert_percent,
@@ -21,6 +21,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
     df_chat = pd.read_excel(chatteurs_file)
     df_creator = pd.read_excel(creator_file)
 
+    #KPIs
     df_chat['Golden ratio'] = df_chat['Golden ratio'].apply(convert_percent)
     df_chat['Unlock ratio'] = df_chat['Unlock ratio'].apply(convert_percent)
     df_chat['Scheduled minutes'] = df_chat['Scheduled hours'].apply(convert_time_to_minutes)
@@ -71,26 +72,26 @@ def process_files(chatteurs_file, creator_file, temp_dir):
         spc, spc_details = compute_spc(row, typologies)
         axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
 
-    result = None
+        result = None
 
-    try:
-        result = {
-            "chatteur": chatteur,
-            "modele": modele,
-            "semaine": semaine,
-            "SPC": spc,
-            "$/h": round(float(row.get('CA / min', 0)) * 60, 2),
-            "flags": ", ".join(map(str, flags)) if flags else "-",
-            "typologies": ", ".join(map(str, typologies[:2])) if typologies else "-",
-            "axe": axe if axe else "-",
-            "modules": ", ".join(map(str, modules)) if modules else "-",
-            "appel_managérial": appel,
-            "salaire_brut": round(row['Salaire brut'], 2),
-            "ajustement": 0,
-            "salaire_net": round(row['Salaire net'], 2),
-            "CA_model": round(ca_total, 2),
-            "fans_model": int(fans_total),
-        }
+        try:
+            result = {
+                "chatteur": chatteur,
+                "modele": modele,
+                "semaine": semaine,
+                "SPC": spc,
+                "$/h": round(float(row.get('CA / min', 0)) * 60, 2),
+                "flags": ", ".join(map(str, flags)) if flags else "-",
+                "typologies": ", ".join(map(str, typologies[:2])) if typologies else "-",
+                "axe": axe if axe else "-",
+                "modules": ", ".join(map(str, modules)) if modules else "-",
+                "appel_managérial": appel,
+                "salaire_brut": round(row['Salaire brut'], 2),
+                "ajustement": 0,
+                "salaire_net": round(row['Salaire net'], 2),
+                "CA_model": round(ca_total, 2),
+                "fans_model": int(fans_total),
+            }
 
         for col in df_chat.columns:
             result[col] = row[col] if not pd.isna(row[col]) else None
