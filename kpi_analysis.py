@@ -98,7 +98,7 @@ def process_files(chatteurs_file, creator_file, temp_dir):
                 pdf_path = os.path.join(temp_dir, f"{chatteur}_{semaine}.pdf")
                 HTML(string=html_out).write_pdf(pdf_path)
                 output_paths.append(pdf_path)
-            except Exception as e:
+        except Exception as e:
                 print(f"Erreur PDF : {e}")
         
             results.append(result)
