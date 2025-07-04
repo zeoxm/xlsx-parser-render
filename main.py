@@ -90,6 +90,18 @@ def parse():
                 row["Keystrokes / msg"] = float(row["Keystrokes (words)"]) / float(row["Messages sent"]) if row["Messages sent"] > 0 else 0
             except:
                 row["Keystrokes / msg"] = 0
+            try:
+                row["Clocked minutes"] = float(row["Clocked hours"]) * 60
+            except:
+                row["Clocked minutes"] = 0
+            try:
+                row["Scheduled minutes"] = float(row["Scheduled hours"]) * 60
+            except:
+                row["Scheduled minutes"] = 0
+            try:
+                row["CA / min"] = float(row["Sales"]) / row["Clocked minutes"] if row["Clocked minutes"] > 0 else 0
+            except:
+                row["CA / min"] = 0
 
             context = {
                 "CA_model": ca_total,
@@ -107,7 +119,7 @@ def parse():
                 "modele": modele,
                 "semaine": semaine,
                 "SPC": spc,
-                "$/h": round(float(row.get("CA / min", 0)) * 60, 2),
+                "$/h": round(row["CA / min"] * 60, 2),
                 "flags": ", ".join(map(str, flags)) if flags else "—",
                 "typologies": ", ".join(map(str, typologies[:2])) if typologies else "—",
                 "axe": axe if axe else "—",
