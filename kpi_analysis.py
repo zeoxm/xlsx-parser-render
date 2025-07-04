@@ -113,6 +113,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "Nouveaux subs": row.get("New Fans", 0),
             "Prix moyen": round(safe_divide(row.get("Sales", 0.0), row.get("PPVs unlocked", 1)), 2),
             "CA / fan": round(safe_divide(row.get("Sales", 0.0), row.get("Fans chatted", 1)), 2),
+        }
         result = {
             "chatteur": row.get("Employees", "-"),
             "modele": row.get("Group", "-"),
@@ -145,7 +146,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "Prix moyen": round(safe_divide(row.get("Sales", 0.0), row.get("PPVs unlocked", 1)), 2),
             "CA / fan": round(safe_divide(row.get("Sales", 0.0), row.get("Fans chatted", 1)), 2),
             "CA / min": round(safe_divide(row.get("Sales", 0.0), row.get("Clocked minutes", 1)), 4)
-            }
+        }
             "modules": "2, 3",
             "appel": "Non",
             "note": "Néant",
