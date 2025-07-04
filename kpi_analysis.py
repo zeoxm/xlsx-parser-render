@@ -49,11 +49,12 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "Keystrokes / msg": round(row.get("Keystrokes (words)", 0) / row.get("Messages sent", 1), 2) if row.get("Messages sent", 0) > 0 else 0
         }
             sales = 0
-
+            result = {
             "chatteur": row.get("Employees", "-"),
             "modele": row.get("Group", "-"),
             "semaine": "2025-06-23"
-
+            }
+            result = {
             "Sales": row.get("Sales", 0.0),
             "PPVs envoyés": row.get("PPVs sent", 0),
             "PPVs débloqués": row.get("PPVs unlocked", 0),
@@ -102,7 +103,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "CA / min": round(row.get("Sales", 0.0) / row.get("Clocked minutes", 1), 4) if row.get("Clocked minutes", 0) > 0 else 0,
             "modules": "2, 3",
             "appel": "Non",
-
+            }
 import pandas as pd
 import numpy as np
 
