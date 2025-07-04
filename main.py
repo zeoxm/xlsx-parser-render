@@ -40,17 +40,28 @@ def parse():
     with tempfile.TemporaryDirectory() as temp_dir:
         df_chat = pd.read_excel(chatteurs_file)
         df_creator = pd.read_excel(creator_file)
+
+        print("✅ Colonnes fichier chatteurs :", df_chat.columns.tolist())
+        print("✅ Colonnes fichier creator :", df_creator.columns.tolist())
+
         semaine = pd.to_datetime("today").strftime("%Y-%m-%d")
         json_data_list = []
 
         for _, row in df_chat.iterrows():
-            chatteur = row["Employees"]
-            modele = row["Group"]
-            creator_row = df_creator[df_creator["Group"] == modele]
+            try:
+                chatteur = row["Employees"]
+                modele = row["Group"]
+            except KeyError as e:
+                raise ValueError(f"[ERREUR CRITIQUE] Colonne manquante dans le fichier chatteurs : {e}")
+
+            try:
+                creator_row = df_creator[df_creator["Group"] == modele]
+            except KeyError:
+                raise ValueError("[ERREUR CRITIQUE] Colonne 'Group' manquante dans le fichier creator")
 
             if not creator_row.empty:
-                raw = str(creator_row["Total earnings Net ($)"].values[0]).replace(",", ".").replace("$", "")
                 try:
+                    raw = str(creator_row["Total earnings Net ($)"].values[0]).replace(",", ".").replace("$", "")
                     ca_total = float(raw)
                 except:
                     ca_total = 0.0
@@ -87,22 +98,16 @@ def parse():
                 "salaire": round(float(row.get("Sales", 0)) * 0.15, 2)
             }
 
-            # JSON
             json_path = os.path.join(temp_dir, f"{chatteur}.json")
             with open(json_path, "w") as f:
                 json.dump(result, f, indent=2)
 
-            # PDF
             generate_pdf(result, temp_dir)
-
-            # Collect
             json_data_list.append(result)
 
-        # XLSX
         synthese_path = os.path.join(temp_dir, "Synthese_Manager.xlsx")
         generate_synthese_manager(json_data_list, synthese_path)
 
-        # ZIP
         zip_path = os.path.join(temp_dir, "outputs.zip")
         with zipfile.ZipFile(zip_path, "w") as zipf:
             for result in json_data_list:
