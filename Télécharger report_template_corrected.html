@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fiche Coaching - {{ data.chatteur or '-' }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #fefefe;
+            color: #1a1a1a;
+            margin: 40px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #dcdcdc;
+        }
+        .section {
+            margin-bottom: 35px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #fafafa;
+        }
+        .label {
+            font-weight: 600;
+            color: #333;
+            display: inline-block;
+            width: 200px;
+        }
+        .value {
+            display: inline-block;
+            font-weight: 400;
+        }
+        .score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2980b9;
+            text-align: center;
+            border: 2px dashed #2980b9;
+            padding: 15px;
+            margin: 20px auto;
+            width: 120px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th {
+            background-color: #f0f2f5;
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-weight: 600;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Fiche Coaching – {{ data.chatteur or '-' }}</h1>
+
+<div class="section">
+    <h2>Informations générales</h2>
+    <p><span class="label">Modèle :</span><span class="value">{{ data.modele or '-' }}</span></p>
+    <p><span class="label">Semaine :</span><span class="value">{{ data.semaine or '-' }}</span></p>
+</div>
+
+<div class="section">
+    <h2>Résumé managérial</h2>
+    <p class="score">{{ data.SPC or '-' }}</p>
+    <p><span class="label">Axe prioritaire :</span><span class="value">{{ data.axe or '-' }}</span></p>
+    <p><span class="label">Typologies :</span><span class="value">{{ data.typologies or '-' }}</span></p>
+    <p><span class="label">Flags :</span><span class="value">{{ data.flags or '-' }}</span></p>
+    <p><span class="label">Modules à revoir :</span><span class="value">{{ data.modules or '-' }}</span></p>
+    <p><span class="label">Appel managérial :</span><span class="value">{{ data.appel or '-' }}</span></p>
+    <p><span class="label">Note :</span><span class="value">{{ data.note or '-' }}</span></p>
+</div>
+
+<div class="section">
+    <h2>Performance brute</h2>
+
+    <h3>💰 Résultats</h3>
+    <table>
+        <tr><td>Sales</td><td>{{ data['Sales'] or '-' }} $</td></tr>
+        <tr><td>Salaire net</td><td>{{ data.salaire_net or '-' }} $</td></tr>
+        <tr><td>$ / h net</td><td>{{ data["$/h net"] }} $</td></tr>
+        <tr><td>Prix moyen</td><td>{{ data["Prix moyen"] }}</td></tr>
+        <tr><td>CA / fan</td><td>{{ data["CA / fan"] }}</td></tr>
+        <tr><td>CA / min</td><td>{{ data["CA / min"] }}</td></tr>
+    </table>
+
+    <h3>📈 Push & conversions</h3>
+    <table>
+        <tr><td>PPVs envoyés</td><td>{{ data['PPVs envoyés'] }}</td></tr>
+        <tr><td>PPVs débloqués</td><td>{{ data['PPVs débloqués'] }}</td></tr>
+        <tr><td>Unlock ratio</td><td>{{ data["Unlock ratio"] }}</td></tr>
+        <tr><td>Golden ratio</td><td>{{ data["Golden ratio"] }}</td></tr>
+    </table>
+
+    <h3>🕒 Activité & rythme</h3>
+    <table>
+        <tr><td>Messages envoyés</td><td>{{ data['Messages envoyés'] }}</td></tr>
+        <tr><td>Fans chatted</td><td>{{ data["Fans chatted"] }}</td></tr>
+        <tr><td>Messages / fan</td><td>{{ data["Messages / fan"] }}</td></tr>
+        <tr><td>Temps clocké</td><td>{{ data["Clocked minutes"] }} min</td></tr>
+        <tr><td>Reply time</td><td>{{ data["Reply time"] }}</td></tr>
+        <tr><td>Inactivité</td><td>{{ data["Inactivité"] }}</td></tr>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Contexte modèle</h2>
+    <ul>
+        <li><strong>CA modèle :</strong> {{ data.ca_modele or '-' }} $</li>
+        <li><strong>Fans actifs :</strong> {{ data.fans_modele or '-' }}</li>
+        <li><strong>Nouveaux subs :</strong> {{ data['Nouveaux subs'] or '-' }}</li>
+        <li><strong>Tips nets :</strong> {{ data['Tips nets'] or '-' }}</li>
+        <li><strong>Messages nets :</strong> {{ data['Messages nets'] or '-' }}</li>
+        <li><strong>Total earnings :</strong> {{ data['Total earnings'] or '-' }}</li>
+    </ul>
+</div>
+
+</body>
+</html>
