@@ -28,9 +28,9 @@ def parse():
             filepath = os.path.join(temp_dir, filename)
         with open(filepath, 'w', encoding='utf-8') as f:
             import json
-                json.dump(json_data, f, ensure_ascii=False, indent=2)
-                zipf.write(filepath, arcname=filename)
-                zipf.write(xlsx_path, arcname="Synthese_Manager.xlsx")
+            json.dump(json_data, f, ensure_ascii=False, indent=2)
+            zipf.write(filepath, arcname=filename)
+            zipf.write(xlsx_path, arcname="Synthese_Manager.xlsx")
 
     # 2. Ajouter tous les PDF + JSON générés automatiquement
         for path in output_paths:
