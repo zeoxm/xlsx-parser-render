@@ -169,7 +169,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "fans_modele": creator_row.get("Active fans") if not creator_row.empty else None
         
         "Fans chatted": row.get("Fans chatted"),
-        "Messages / fan": round(row.get("Messages sent", 0) / row.get("Fans chatted", 1), 2) if row.get("Fans chatted", 0) > 0 else None, 0) / row.get("Fans chatted", 1), 2),
+        "Messages / fan": round(row.get("Messages sent", 0) / row.get(("Fans chatted", 1), 2) if row.get(("Fans chatted", 0) > 0 else None, 0) / row.get(("Fans chatted", 1), 2),
 
     }
 
