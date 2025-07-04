@@ -44,7 +44,6 @@ def parse():
         print("✅ Colonnes fichier chatteurs :", df_chat.columns.tolist())
         print("✅ Colonnes fichier creator :", df_creator.columns.tolist())
 
-        # 🔧 Conversion des ratios texte en float
         df_chat["Unlock ratio"] = df_chat["Unlock ratio"].apply(convert_percent)
         df_chat["Golden ratio"] = df_chat["Golden ratio"].apply(convert_percent)
 
@@ -102,6 +101,10 @@ def parse():
                 row["CA / min"] = float(row["Sales"]) / row["Clocked minutes"] if row["Clocked minutes"] > 0 else 0
             except:
                 row["CA / min"] = 0
+            try:
+                row["Inactivité"] = float(row["Reply time"])
+            except:
+                row["Inactivité"] = 0
 
             context = {
                 "CA_model": ca_total,
