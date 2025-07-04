@@ -118,11 +118,17 @@ def parse():
             axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
 
             result = {
+                "ca_modele": ca_total,
+                "fans_modele": fans_total,
+                "salaire_brut": round(float(row.get("Sales", 0)) * 0.15, 2),
+                "ajustement": 0.0,
+                "salaire_net": round(float(row.get("Sales", 0)) * 0.15 + 0.0, 2),
+                "dollars_per_hour": round(row["CA / min"] * 60, 2),
                 "chatteur": chatteur,
                 "modele": modele,
                 "semaine": semaine,
                 "SPC": spc,
-                "$/h": round(row["CA / min"] * 60, 2),
+                "dollars_per_hour": round(row["CA / min"] * 60, 2),
                 "flags": ", ".join(map(str, flags)) if flags else "—",
                 "typologies": ", ".join(map(str, typologies[:2])) if typologies else "—",
                 "axe": axe if axe else "—",
