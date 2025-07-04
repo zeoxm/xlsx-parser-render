@@ -147,7 +147,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "Prix moyen": round(safe_divide(row.get("Sales", 0.0), row.get("PPVs unlocked", 1)), 2),
             "CA / fan": round(safe_divide(row.get("Sales", 0.0), row.get("Fans chatted", 1)), 2),
             "CA / min": round(safe_divide(row.get("Sales", 0.0), row.get("Clocked minutes", 1)), 4)
-        }
+        }{
             "modules": "2, 3",
             "appel": "Non",
             "note": "Néant",
@@ -167,7 +167,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "earnings_net": creator_row.get("Total earnings Net") if not creator_row.empty else None,
             "ca_modele": creator_row.get("Total earnings Net") if not creator_row.empty else None,
             "fans_modele": creator_row.get("Active fans") if not creator_row.empty else None
-        
+    }{
         "Fans chatted": row.get("Fans chatted"),
         "Messages / fan": round(row.get("Messages sent", 0) / row.get(("Fans chatted", 1), 2) if row.get(("Fans chatted", 0) > 0 else None, 0) / row.get(("Fans chatted", 1), 2),
 
@@ -186,7 +186,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
         "Fans chatted": row.get("Fans chatted"),
         "Messages / fan": round(row.get("Messages sent", 0) / row.get("Fans chatted", 1), 2) if row.get("Fans chatted", 0) > 0 else None, 0) / row.get("Fans chatted", 1), 2),
 
-    }
+    
 
         # Simuler l'enregistrement JSON
         print(f"Génération JSON pour {result['chatteur']}: OK")
