@@ -47,7 +47,7 @@ def generate_pdf(result, output_dir):
 @app.route('/parse', methods=['POST'])
 def parse():
     if 'chatteurs' not in request.files or 'creator' not in request.files:
-    return jsonify({'error': 'Les deux fichiers "chatteurs" et "creator" sont requis'}), 400
+        return jsonify({'error': 'Les deux fichiers "chatteurs" et "creator" sont requis'}), 400
     # Traitement principal intégré proprement
     with tempfile.TemporaryDirectory() as tmpdir:
         chatteur_path = os.path.join(tmpdir, "chatteurs.xlsx")
