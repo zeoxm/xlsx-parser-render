@@ -77,6 +77,20 @@ def parse():
                 ca_total = 0.0
                 fans_total = 0
 
+            # 🔁 KPIs calculés manuellement injectés dans row
+            try:
+                row["Prix moyen"] = float(row["Sales"]) / float(row["PPVs unlocked"]) if row["PPVs unlocked"] > 0 else 0
+            except:
+                row["Prix moyen"] = 0
+            try:
+                row["CA / fan"] = float(row["Sales"]) / float(row["Fans chatted"]) if row["Fans chatted"] > 0 else 0
+            except:
+                row["CA / fan"] = 0
+            try:
+                row["Keystrokes / msg"] = float(row["Keystrokes (words)"]) / float(row["Messages sent"]) if row["Messages sent"] > 0 else 0
+            except:
+                row["Keystrokes / msg"] = 0
+
             context = {
                 "CA_model": ca_total,
                 "fans_model": fans_total,
