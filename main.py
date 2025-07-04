@@ -55,7 +55,7 @@ def parse():
                 raise ValueError(f"[ERREUR CRITIQUE] Colonne manquante dans le fichier chatteurs : {e}")
 
             try:
-                creator_row = df_creator[df_creator["Group"] == modele]
+                creator_row = df_creator[df_creator["Creator"] == modele]
             except KeyError:
                 raise ValueError("[ERREUR CRITIQUE] Colonne 'Group' manquante dans le fichier creator")
 
