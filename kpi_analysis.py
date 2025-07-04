@@ -22,7 +22,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "semaine": "2025-06-23"
         }
 
-        result.update({
+        result.update{
             "Sales": row.get("Sales", 0.0),
             "PPVs envoyés": row.get("PPVs sent", 0),
             "PPVs débloqués": row.get("PPVs unlocked", 0),
@@ -70,7 +70,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "Prix moyen": round(safe_divide(row.get("Sales", 0.0), row.get("PPVs unlocked", 1)), 2),
             "CA / fan": round(safe_divide(row.get("Sales", 0.0), row.get("Fans chatted", 1)), 2),
             "CA / min": round(safe_divide(row.get("Sales", 0.0), row.get("Clocked minutes", 1)), 4)
-        }
+            }
             "modules": "2, 3",
             "appel": "Non",
             "note": "Néant",
