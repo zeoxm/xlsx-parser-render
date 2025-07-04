@@ -120,8 +120,7 @@ def parse():
             result = {
                 "ca_modele": ca_total,
                 "fans_modele": fans_total,
-                "salaire_brut": round(float(row.get("Sales", 0)) * 0.15, 2),
-                "ajustement": 0.0,
+                                "ajustement": 0.0,
                 "salaire_net": round(float(row.get("Sales", 0)) * 0.15 + 0.0, 2),
                 "dollars_per_hour": round(row["CA / min"] * 60, 2),
                 "chatteur": chatteur,
@@ -139,7 +138,7 @@ def parse():
 
             json_path = os.path.join(temp_dir, f"{chatteur}.json")
             with open(json_path, "w") as f:
-                json.dump(result, f, indent=2)
+                json.dump(result, f, indent=2, ensure_ascii=False)
 
             generate_pdf(result, temp_dir)
             json_data_list.append(result)
