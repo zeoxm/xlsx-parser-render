@@ -44,6 +44,10 @@ def parse():
         print("✅ Colonnes fichier chatteurs :", df_chat.columns.tolist())
         print("✅ Colonnes fichier creator :", df_creator.columns.tolist())
 
+        # 🔧 Conversion des ratios texte en float
+        df_chat["Unlock ratio"] = df_chat["Unlock ratio"].apply(convert_percent)
+        df_chat["Golden ratio"] = df_chat["Golden ratio"].apply(convert_percent)
+
         semaine = pd.to_datetime("today").strftime("%Y-%m-%d")
         json_data_list = []
 
@@ -55,13 +59,13 @@ def parse():
                 raise ValueError(f"[ERREUR CRITIQUE] Colonne manquante dans le fichier chatteurs : {e}")
 
             try:
-                creator_row = df_creator[df_creator["Creator"] == modele]
+                creator_row = df_creator[df_creator["Group"] == modele]
             except KeyError:
-                raise ValueError("[ERREUR CRITIQUE] Colonne 'Group' manquante dans le fichier creator")
+                creator_row = df_creator[df_creator["Creator"] == modele]
 
             if not creator_row.empty:
                 try:
-                    raw = str(creator_row["Total earnings Net ($)"].values[0]).replace(",", ".").replace("$", "")
+                    raw = str(creator_row["Total earnings Net"].values[0]).replace(",", ".").replace("$", "")
                     ca_total = float(raw)
                 except:
                     ca_total = 0.0
