@@ -54,19 +54,22 @@ def process_files(chatteurs_file, creator_file, temp_dir):
             "modele": modele,
             "semaine": semaine,
             "SPC": spc,
-            "$/h": round(float(row.get("CA / min", 0)) * 60, 2),
+            "dollars_per_hour": round(float(row.get("CA / min", 0)) * 60, 2),
             "flags": ", ".join(map(str, flags)) if flags else "—",
             "typologies": ", ".join(map(str, typologies[:2])) if typologies else "—",
             "axe": axe if axe else "—",
             "modules": ", ".join(map(str, modules)) if modules else "—",
             "appel": appel if appel else "Non",
-            "salaire": round(float(row.get("Sales", 0)) * 0.15, 2)
+            "salaire_net": round(float(row.get("Sales", 0)) * 0.15 + 0.0, 2),
+            "ajustement": 0.0,
+            "ca_modele": ca_total,
+            "fans_modele": fans_total
         }
 
         # Sauvegarde JSON
         json_path = os.path.join(temp_dir, f"{chatteur}.json")
         with open(json_path, "w") as f:
-            json.dump(result, f, indent=2)
+            json.dump(result, f, indent=2, ensure_ascii=False)
 
         # Génère PDF
         generate_pdf(result, temp_dir)
