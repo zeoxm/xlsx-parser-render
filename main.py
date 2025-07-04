@@ -118,6 +118,13 @@ def parse():
             axe, modules, appel = compute_coaching_axis(row, flags, typologies, spc, context)
 
             result = {
+            "Prix moyen": row.get("Prix moyen", 0),
+            "CA / fan": row.get("CA / fan", 0),
+            "Keystrokes / msg": row.get("Keystrokes / msg", 0),
+            "Clocked minutes": row.get("Clocked minutes", 0),
+            "Scheduled minutes": row.get("Scheduled minutes", 0),
+            "CA / min": row.get("CA / min", 0),
+            "Inactivité": row.get("Inactivité", 0),
                 "ca_modele": ca_total,
                 "fans_modele": fans_total,
                                 "ajustement": 0.0,
