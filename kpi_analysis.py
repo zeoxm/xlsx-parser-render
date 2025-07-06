@@ -151,7 +151,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             employee = f"inconnu_{index}"
 
         group = str(row.get("Group", "-")).strip()
-        creator_row = df_creator[df_creator["Creator group"].astype(str).str.strip() == group]
+        creator_row = df_creator[df_creator["Creator"].astype(str).str.strip() == group]
         if creator_row.empty:
             print(f"[SKIP] Aucun match pour group: {group}")
             continue
