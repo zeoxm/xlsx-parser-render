@@ -2,10 +2,8 @@
 import pandas as pd
 import numpy as np
 import json
-from rules_engine import enrich_row
-
-import pandas as pd
 import re
+from rules_engine import enrich_row
 
 def convert_time_to_minutes(time_str):
     if pd.isna(time_str):
