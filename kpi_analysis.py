@@ -156,7 +156,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
 
         group = str(row.get("Group", "-")).strip()
 
-        creator_row = df_creator[df_creator["Creator group"] == group]
+        creator_row = df_creator[df_creator["Creator group"].astype(str).str.strip() == str(group).strip()]
         if not creator_row.empty:
             try:
                 ca_modele = float(str(creator_row["Total earnings Net"].values[0]).replace("$", "").replace(",", "."))
