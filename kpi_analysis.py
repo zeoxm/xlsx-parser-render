@@ -161,33 +161,29 @@ def process_files(chatteurs_path, creator_path, output_dir):
         if creator_row.empty:
             print(f"[SKIP] Aucun match pour group: {group}")
             continue
-        print(f"[MATCH] Groupe trouvé pour: {group}")
-    if creator_row.empty:
-    if creator_row.empty:
-    
-    if not creator_row.empty:
-       try:
-            ca_modele = float(str(creator_row["Total earnings Net"].values[0]).replace("$", "").replace(",", "."))
-        except:
-            ca_modele = 0.0
-       try:
-            fans_modele = int(creator_row["Active fans"].values[0])
-        except:
-            fans_modele = 0
-       try:
-            subs_modele = int(creator_row["New fans"].values[0])
-        except:
-            subs_modele = 0
-            ca_modele = 0.0
-            fans_modele = 0
-            subs_modele = 0
-
-        sales = row.get("Sales", 0.0)
-        ppvs_unlocked = row.get("PPVs unlocked", 0)
-        fans_chatted = row.get("Fans chatted", 0)
-        messages_sent = row.get("Messages sent", 0)
-        keystrokes = row.get("Keystrokes (words)", 0)
-        clocked_minutes = row.get("Clocked minutes", 0)
+        print(f"[MATCH] Groupe trouvé pour: {group}")  
+        if not creator_row.empty:
+           try:
+                ca_modele = float(str(creator_row["Total earnings Net"].values[0]).replace("$", "").replace(",", "."))
+            except:
+                ca_modele = 0.0
+           try:
+                fans_modele = int(creator_row["Active fans"].values[0])
+            except:
+                fans_modele = 0
+           try:
+                subs_modele = int(creator_row["New fans"].values[0])
+            except:
+                subs_modele = 0
+                ca_modele = 0.0
+                fans_modele = 0
+                subs_modele = 0
+            sales = row.get("Sales", 0.0)
+            ppvs_unlocked = row.get("PPVs unlocked", 0)
+            fans_chatted = row.get("Fans chatted", 0)
+            messages_sent = row.get("Messages sent", 0)
+            keystrokes = row.get("Keystrokes (words)", 0)
+            clocked_minutes = row.get("Clocked minutes", 0)
 
         result = {
             "chatteur": employee,
