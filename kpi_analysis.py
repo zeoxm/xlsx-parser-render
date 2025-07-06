@@ -158,11 +158,11 @@ def process_files(chatteurs_path, creator_path, output_dir):
 
         
         creator_row = df_creator[df_creator["Creator group"].astype(str).str.strip() == str(group).strip()]
-        if creator_row.empty:
-            print(f"[SKIP] Aucun match pour group: {group}")
-        continue
-            else:
-                print(f"[MATCH] Groupe trouvé pour: {group}")
+    if creator_row.empty:
+        print(f"[SKIP] Aucun match pour group: {group}")
+    continue
+        else:
+            print(f"[MATCH] Groupe trouvé pour: {group}")
         if creator_row.empty:
             print(f"[SKIP] Aucun match pour group: {group}")
         else:
