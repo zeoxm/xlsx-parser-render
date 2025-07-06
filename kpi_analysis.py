@@ -147,12 +147,12 @@ def process_files(chatteurs_path, creator_path, output_dir):
 
     for index, row in df_chat.iterrows():
         
-employee = row.get("Employees", None)
-if not isinstance(employee, str):
-    employee = str(employee) if employee is not None else f"inconnu_{index}"
-employee = employee.strip()
-if not employee or employee.lower() in ["none", "nan", "false"]:
-    employee = f"inconnu_{index}"
+        employee = row.get("Employees", None)
+    if not isinstance(employee, str):
+        employee = str(employee) if employee is not None else f"inconnu_{index}"
+        employee = employee.strip()
+    if not employee or employee.lower() in ["none", "nan", "false"]:
+        employee = f"inconnu_{index}"
 
         group = str(row.get("Group", "-")).strip()
 
