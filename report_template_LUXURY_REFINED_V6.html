@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Premium</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@600&family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+            background-color: #0e0e0e;
+            color: #f5f5f5;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #d4af37;
+            border-bottom: 1px solid #d4af37;
+            padding-bottom: 10px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        h2 {
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 0;
+            margin: 0;
+    
+            font-size: 22px;
+            color: #d4af37;
+            border-bottom: 1px solid #d4af37;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section {
+            background-color: #1a1a1a;
+            border: 1px solid #d4af37;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .score-box {
+            background-color: #1c1c1c;
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-size: 32px;
+            color: #d4af37;
+            margin: 30px auto;
+            width: 300px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        .value {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rapport hebdomadaire – {{ data.chatteur }}</h1>
+
+    <div class="score-box">
+        🏆 Score SPC : {{ data.SPC }}/100
+    </div>
+
+    <div class="section" style="max-width: 600px; margin: 0 auto;">
+        <h2 style="font-size:26px;"><em><strong>Résumé managérial</strong></em></h2>
+        <ul>
+            <li><span class="label">Typologies :</span> <span class="value">{{ data.typologies }}</span></li>
+            <li><span class="label">Flags :</span> <span class="value">{{ data.flags }}</span></li>
+            <li><span class="label">Axe prioritaire :</span> <span class="value">{{ data.axe }}</span></li>
+            <li><span class="label">Modules à revoir :</span> <span class="value">{{ data.modules }}</span></li>
+            <li><span class="label">Appel managérial :</span> <span class="value">{{ data.appel }}</span></li>
+            <li><span class="label">Note :</span> <span class="value">{{ data.note }}</span></li>
+        </ul>
+    </div>
+
+    <div class="grid">
+        <div class="section">
+            <h2 style="font-size:26px;"><em><strong>Performance</strong></em></h2>
+            <ul>
+                <li><span class="label">Modèle :</span> <span class="value">{{ data.modele }}</span></li>
+                <li><span class="label">CA :</span> <span class="value">{{ data.Sales }} $</span></li>
+                <li><span class="label">Salaire :</span> <span class="value">{{ data.salaire_net }} $</span></li>
+                <li><span class="label">Prix moyen :</span> <span class="value">{{ data["Prix moyen"] }} $</span></li>
+                <li><span class="label">Unlock ratio :</span> <span class="value">{{ data["Unlock ratio"] }} %</span></li>
+                <li><span class="label">Golden ratio :</span> <span class="value">{{ data["Golden ratio"] }}</span></li>
+                <li><span class="label">Messages envoyés :</span> <span class="value">{{ data["Messages envoyés"] }}</span></li>
+                <li><span class="label">Fans chatted :</span> <span class="value">{{ data["Fans chatted"] }}</span></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 style="font-size:26px;"><em><strong>Contexte modèle</strong></em></h2>
+            <ul>
+                <li><span class="label">CA modèle :</span> <span class="value">{{ data.ca_modele or '-' }} $</span></li>
+                <li><span class="label">Fans actifs :</span> <span class="value">{{ data.fans_modele or '-' }}</span></li>
+                <li><span class="label">Nouveaux subs :</span> <span class="value">{{ data.subs_modele or '-' }}</span></li>
+                <li><span class="label">CA / sub :</span> <span class="value">{{ data.ca_par_sub or '-' }} $</span></li>
+                <li><span class="label">Ratio clock / sched :</span> <span class="value">{{ data.ratio_clocksched | round(1) }} %</span></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
