@@ -161,12 +161,12 @@ def process_files(chatteurs_path, creator_path, output_dir):
         if creator_row.empty:
             print(f"[SKIP] Aucun match pour group: {group}")
         continue
+            else:
+                print(f"[MATCH] Groupe trouvé pour: {group}")
+        if creator_row.empty:
+            print(f"[SKIP] Aucun match pour group: {group}")
         else:
             print(f"[MATCH] Groupe trouvé pour: {group}")
-    if creator_row.empty:
-        print(f"[SKIP] Aucun match pour group: {group}")
-    else:
-        print(f"[MATCH] Groupe trouvé pour: {group}")
     
         if not creator_row.empty:
             try:
