@@ -47,6 +47,89 @@ def clean_columns(df):
     df.columns = [str(col).strip() for col in df.columns]
     return df
 
+def enrich_kpi_row(row):
+    unlock = row.get("Unlock ratio", 0)
+    prix_moyen = row.get("Prix moyen", 0)
+    ca_fan = row.get("CA / fan", 0)
+    golden = row.get("Golden ratio", 0)
+    clocked = row.get("Clocked minutes", 0)
+    kpm = row.get("Keystrokes / msg", 0)
+    mpm = row.get("Messages / min", 0)
+    inact = row.get("Inactivité", 0)
+    sales = row.get("Sales", 0)
+    messages = row.get("Messages envoyés", 0)
+    fans = row.get("Fans chatted", 0)
+
+    spc = 0
+    spc += 10 if unlock >= 35 else 5 if unlock >= 25 else 0
+    spc += 10 if prix_moyen > 25 else 5 if prix_moyen >= 20 else 0
+    spc += 10 if ca_fan > 2 else 5 if ca_fan >= 1 else 0
+    spc += 10 if 3 <= golden <= 5 else 5 if 2 <= golden < 3 or 5 < golden <= 6 else 0
+    spc += 10 if clocked > 1800 else 5 if clocked >= 1200 else 0
+    spc += 10 if 40 <= kpm <= 60 else 5 if 25 <= kpm < 40 or 60 < kpm <= 70 else 0
+    spc += 5 if mpm > 1.1 else 3 if mpm >= 0.7 else 0
+    spc += 5 if inact < 40 else 3 if inact <= 60 else 0
+    spc += 10 if sales < 100 else 0
+    spc = min(spc, 100)
+    row["SPC"] = spc
+
+    typologies = []
+    if messages > 4000 and sales < 200 and unlock < 25:
+        typologies.append("Volumeur inefficace")
+    if unlock > 40 and prix_moyen < 20:
+        typologies.append("Unlocker low cost")
+    if sales > 300 and messages < 1500 and unlock > 30:
+        typologies.append("Sniper rentable")
+    if clocked > 300 and sales < 300:
+        typologies.append("Présent non rentable")
+    if sales > 500 and clocked < 180:
+        typologies.append("Sous-exploité")
+    if clocked > 0 and inact > 60:
+        typologies.append("Ghost partiel")
+    row["typologies"] = ", ".join(typologies[:2]) if typologies else "-"
+
+    flags = []
+    if unlock < 20:
+        flags.append("F3")
+    if golden > 6 and unlock < 25:
+        flags.append("F2")
+    if prix_moyen < 15:
+        flags.append("F4")
+    if clocked == 0 or inact > 60:
+        flags.append("F1")
+    if messages > 4000 and fans < 100:
+        flags.append("F7")
+    if kpm > 70:
+        flags.append("F10")
+    row["flags"] = ", ".join(flags) if flags else "-"
+
+    axe = "-"
+    modules = set()
+    if "F1" in flags:
+        axe = "Présence instable ou absente"
+        modules.update(["0"])
+    elif "F3" in flags or unlock < 25:
+        axe = "Push inefficace ou mal timé"
+        modules.update(["3", "4", "14"])
+    elif "F4" in flags:
+        axe = "Contenu sous-valorisé"
+        modules.update(["13", "6"])
+    elif "F7" in flags:
+        axe = "Mauvaise gestion des leads"
+        modules.update(["5", "3"])
+    elif "F10" in flags:
+        axe = "Style automatisé suspect"
+        modules.update(["9", "12"])
+    elif "Volumeur inefficace" in typologies:
+        axe = "Trop d’effort pour peu de résultats"
+        modules.update(["3", "14", "4"])
+    row["axe"] = axe
+    row["modules"] = ", ".join(sorted(modules)) if modules else "-"
+
+    row["appel"] = "Oui" if "F1" in flags or spc < 45 or "Volumeur inefficace" in typologies else "Non"
+    row["note"] = "-"
+    return row
+
 def process_files(chatteurs_path, creator_path, output_dir):
     df_chat = clean_columns(pd.read_excel(chatteurs_path))
     df_creator = clean_columns(pd.read_excel(creator_path))
@@ -68,8 +151,7 @@ def process_files(chatteurs_path, creator_path, output_dir):
             employee = f"inconnu_{index}"
 
         group = str(row.get("Group", "-")).strip()
-
-        creator_row = df_creator[df_creator["Creator group"].astype(str).str.strip() == str(group).strip()]
+        creator_row = df_creator[df_creator["Creator group"].astype(str).str.strip() == group]
         if creator_row.empty:
             print(f"[SKIP] Aucun match pour group: {group}")
             continue
@@ -125,6 +207,9 @@ def process_files(chatteurs_path, creator_path, output_dir):
             "ratio_clocksched": safe_divide(clocked_minutes, row.get("Scheduled minutes", 1)) * 100
         }
 
+        # Enrichissement métier
+        result = enrich_kpi_row(result)
+        # Enrichissement supplémentaire éventuel
         result = enrich_row(result)
 
         file_name = f"Rapport_{employee}.json"
