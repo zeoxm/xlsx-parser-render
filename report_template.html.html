@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport hebdomadaire – {{ data.chatteur }}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;600&display=swap');
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 17.33px;
+            color: #f4e3b2;
+            margin-bottom: 10px;
+        }
+
+        .score-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+            border: 1px solid #f4e3b2;
+            color: #f4e3b2;
+            font-size: 12.0px;
+            text-align: center;
+            padding: 10px;
+            margin: 20px auto 40px auto;
+            width: fit-content;
+        }
+
+        .section {
+    background-color: #2f2f2f;
+    page-break-inside: avoid;
+            border: 1px solid #f4e3b2;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+    font-size: 14px;
+            background-color: #1a1a1a;
+            font-family: 'Cinzel', serif;
+            color: #f4e3b2;
+            font-size: 10.67px;
+            padding: 10px 12px;
+            border-bottom: 1px solid #f4e3b2;
+            text-align: center;
+        }
+
+        .section-content {
+            padding: 12px;
+        }
+
+        .section-content ul {
+    font-size: 9px;
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .section-content li {
+    font-size: 9px;
+            margin-bottom: 6px;
+        }
+
+        .split-sections {
+            display: flex;
+            gap: 20px;
+        }
+
+        .split-sections .section {
+    background-color: #2f2f2f;
+    page-break-inside: avoid;
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 6px 0;
+        }
+
+        td.label {
+    font-size: 9px;
+            color: #f4e3b2;
+            font-weight: 600;
+            width: 50%;
+        }
+
+        td.value {
+    font-size: 9px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body style='page-break-inside: avoid;'>
+    <h1>Rapport hebdomadaire – {{ data.chatteur }}</h1>
+
+    <div class="score-box">
+        Score SPC : {{ data.SPC }}/100
+    </div>
+
+    <div class="section">
+        <div class="section-title">Résumé managérial</div>
+        <div class="section-content">
+            <ul style="">
+                <li><strong>Typologies :</strong> {{ data.typologies }}</li>
+                <li><strong>Flags :</strong> {{ data.flags }}</li>
+                <li><strong>Axe prioritaire :</strong> {{ data.axe }}</li>
+                <li><strong>Modules à revoir :</strong> {{ data.modules }}</li>
+                <li><strong>Appel managérial :</strong> {{ data.appel }}</li>
+                <li><strong>Note :</strong> {{ data.note }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="split-sections">
+        <div class="section">
+            <div class="section-title">Performance</div>
+            <div class="section-content">
+                <table style="border-collapse: collapse; width: 100%;">
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Modèle</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.modele }}</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">CA</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.Sales }} $</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Salaire</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.salaire_net }} $</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Prix moyen</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Prix moyen"] }} $</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Unlock ratio</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Unlock ratio"] }} %</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Golden ratio</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Golden ratio"] }}</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Messages envoyés</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Messages envoyés"] }}</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Fans chatted</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Fans chatted"] }}</td></tr>
+                <tr><td style="border-bottom: 1px solid #444;" class="label">Reply time</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Reply time"] }}</td></tr>
+</table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Contexte modèle</div>
+            <div class="section-content">
+                <table style="border-collapse: collapse; width: 100%;">
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">CA modèle</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.ca_modele or '-' }} $</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Fans actifs</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.fans_modele or '-' }}</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Nouveaux subs</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.subs_modele or '-' }}</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">CA / sub</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.ca_par_sub or '-' }} $</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Ratio clock / sched</td><td style="border-bottom: 1px solid #444;" class="value">{{ data.ratio_clocksched | round(1) }} %</td></tr>
+                    <tr><td style="border-bottom: 1px solid #444;" class="label">Inactivité</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Inactivité"] or '-' }} %</td></tr>
+                <tr><td style="border-bottom: 1px solid #444;" class="label">Reply time</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Reply time"] }}</td></tr>
+</table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Détail d’activité</div>
+        <div class="section-content">
+            <table style="border-collapse: collapse; width: 100%;">
+                <tr><td style="border-bottom: 1px solid #444;" class="label">Messages / min</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Messages / min"] }}</td></tr>
+                <tr><td style="border-bottom: 1px solid #444;" class="label">Keystrokes / min</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Keystrokes / min"] }}</td></tr>
+                                <tr><td style="border-bottom: 1px solid #444;" class="label">Clocked minutes</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Clocked minutes"] }}</td></tr>
+                <tr><td style="border-bottom: 1px solid #444;" class="label">Scheduled minutes</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Scheduled minutes"] }}</td></tr>
+            <tr><td style="border-bottom: 1px solid #444;" class="label">Reply time</td><td style="border-bottom: 1px solid #444;" class="value">{{ data["Reply time"] }}</td></tr>
+</table>
+        </div>
+    </div>
+</body>
+</html>
